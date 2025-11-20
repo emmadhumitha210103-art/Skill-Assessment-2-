@@ -47,24 +47,41 @@ Thus, 200 timer overflows generate 50 ms.
 ALGORITHM:
 
 1.Start the program.
+
 2.Jump to MAIN to begin execution.
+
 3.Initialize Port 3.0 as output and turn OFF the LED initially.
+
 4.Configure Timer-0 in Mode-2 (8-bit auto-reload):
+
    Load TMOD with 02H
+   
    Load TH0 and TL0 with 00H (full 256-count overflow)
+   
 5.Enter the BLINK_LOOP:
+
    Toggle LED connected to P3.0 using CPL P3.0.
+   
 6.Call the delay subroutine DELAY_50MS to create approximately 50 ms delay using repeated timer overflows.
+
 7.Inside DELAY_50MS subroutine:
-Load register R2 with 180, the required number of Timer-0 overflows to produce 50 ms.
-Start Timer-0 (set TR0 = 1).
-Wait for TF0 to become 1 (timer overflow).
-Clear TF0 (reset overflow flag).
-Decrement R2 and repeat until R2 = 0.
-Stop Timer-0 (clear TR0).
-Return to main program.
-Return to BLINK_LOOP and continue blinking indefinitely.
-End of program.
+
+  Load register R2 with 180, the required number of Timer-0 overflows to produce 50 ms.
+  
+  Start Timer-0 (set TR0 = 1).
+
+  Wait for TF0 to become 1 (timer overflow).
+  
+  Clear TF0 (reset overflow flag).
+  
+  Decrement R2 and repeat until R2 = 0.
+  
+  Stop Timer-0 (clear TR0).
+
+  Return to main program.
+8.Return to BLINK_LOOP and continue blinking indefinitely.
+
+9.End of program.
 
 PROGRAM :
 
